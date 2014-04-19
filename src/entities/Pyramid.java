@@ -6,9 +6,6 @@ import math3D.*;
 //todo: turn this into a Cone class that defaults to 4 sides
 public class Pyramid extends VisibleObject
 {
-	public Point3 loc = new Point3(0,0,0);
-	public Rotation rot = new Rotation(0,0,0);
-
 	public float side = 10;	//width of the pyramid (default is 10)
 
 	public Pyramid(float side)

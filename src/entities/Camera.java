@@ -1,13 +1,13 @@
 package entities;
 
+import java.awt.Color;
+
 import entities.visible.Visible;
 import main.Main;
 import math3D.*;
 
 public class Camera extends VisibleObject
 {
-	public Point3 loc;
-	public Rotation rot;
 	public float focalLength;
 	public float lensWidth = 1f;
 	public float lensHeight = (lensWidth*(float)Main.pixel.height)/(float)Main.pixel.width;
@@ -28,6 +28,7 @@ public class Camera extends VisibleObject
 		points.add(plane.p3);
 		points.add(new Point3(loc.x+lensWidth/2, loc.y+focalLength, loc.z-lensHeight/2));
 		points.add(loc);
+		points.add(new Point3(getLookDir()));
 		
 		int[][] faces = 
 			{{0,1},
@@ -37,10 +38,16 @@ public class Camera extends VisibleObject
 			{0,4},
 			{1,4},
 			{2,4},
-			{3,4}};
+			{3,4},
+			{4,5}};
 		
 		for(int i = 0; i < faces.length; i++)
-			visibles.add(Visible.pointsToVisible(faces[i]));
+		{
+			if(i < faces.length -1)
+				visibles.add(Visible.pointsToVisible(faces[i]));
+			else
+				visibles.add(Visible.pointsToVisible(faces[i], Color.red));
+		}
 	}
 	
     /*
@@ -70,22 +77,19 @@ public class Camera extends VisibleObject
 		return new Plane(s1, s2, s3);
 	}
 	
-	public void tick()
+	public Vector getLookDir()
 	{
-//		System.out.println(this);
+		Plane camPlane = getPlane();
+		Point3 topLeftCorner = camPlane.p1;
+		Point3 topRightCorner = camPlane.p2;
+		Point3 botLeftCorner = camPlane.p3;
 		
-//		if(rot.x != 0 || rot.y != 0 || rot.z != 0)
-//		{
-//			System.out.println(rot);
-//		}
+		Tuple cameraHorz = topRightCorner.sub(topLeftCorner);		//sensorWidth, as a Tuple
+		Tuple cameraVert = botLeftCorner.sub(topLeftCorner);		//-sensorHeight, as a Tuple
+		Tuple lookVector = cameraHorz.cross(cameraVert);	//vector pointing the way the camera is looking
+		return new Vector(lookVector.add(new Tuple(0,0,-1)));
 	}
 	
-//	public Vector getLookDir()
-//	{
-//		Vector lookDir = new Vector(new Point(0,focalLength,0).rotateAbout(rot, loc).add(loc.multiply(-1)));
-//		return lookDir;
-//	}
-//	
 //	public Plane getPlane()
 //	{
 //		Vector vec = getLookDir();

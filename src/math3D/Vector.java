@@ -6,4 +6,9 @@ public class Vector extends Tuple
 	{
 		super(x, y, z);
 	}
+	
+	public Vector(Tuple tup)
+	{
+		super(tup.x, tup.y, tup.z);
+	}
 }

@@ -27,7 +27,7 @@ public class Render
      */
     
 	//if returns Point2(-1f, -1f) then don't draw the point
-	public static Point2 getLocalCoords(Tuple globalPoint)	//points on plane
+	public static Point2 getScreenCoords(Tuple globalPoint)	//points on plane
 	{
 		Camera cam = Main.world.getSelectedCamera();
 		Point3 camLoc = cam.loc;

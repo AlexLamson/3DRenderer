@@ -5,9 +5,6 @@ import math3D.*;
 
 public class Sphere extends VisibleObject
 {
-	public Point3 loc = new Point3(0,0,0);
-	public Rotation rot = new Rotation(0,0,0);
-
 	public double radius = 10;	//width of the pyramid (default is 10)
 	public int horzRings = 5;
 	public int vertRings = 5;

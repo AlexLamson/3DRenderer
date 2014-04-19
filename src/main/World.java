@@ -21,29 +21,30 @@ public class World
 	public World()
 	{
 		Camera cam = new Camera(new math3D.Point3(0,-2.0f,0), new Rotation(0,0,0), 0.1f);	//1 is for the focal length of the camera;
-		addCamera(cam);
+		add(cam);
 		
-//		objects.add(new OriginPoint(0.1f));
+//		add(new OriginPoint(0.1f));
 		
 		if(fallingCubesMode)
 			cam.loc = new Point3(0.0f, -2.082f, 0.697f);
 //		else
 //			objects.add(new Cube(1.0f));
 		
-		objects.add(cube);
+		add(cube);
 		
-//		objects.add(new FallingCube(0, 0, 2, 0.5f));
-//		objects.add(new SpinCube(0.1f));
-//		objects.add(new Sphere(0.5, 10, 10));
-//		objects.add(new Pyramid(0.5f));
+//		add(new FallingCube(0, 0, 2, 0.5f));
+//		add(new SpinCube(0.1f));
+//		add(new Sphere(0.5, 10, 10));
+//		add(new Pyramid(0.5f));
 		
-		addCamera(new Camera(new math3D.Point3(0,-0.5f,0), new Rotation(0,0,0), 1.0f));
+		add(new Camera(new math3D.Point3(0,-0.5f,0), new Rotation(0,0,0), 1.0f));
 	}
 	
-	public void addCamera(Camera cam)
+	public void switchCameras()
 	{
-		objects.add(cam);
-		cameras.add(cam);
+		selectedCamera++;
+		if(selectedCamera >= cameras.size())
+			selectedCamera = 0;
 	}
 	
 	public Camera getSelectedCamera()
@@ -51,10 +52,22 @@ public class World
 		return cameras.get(selectedCamera);
 	}
 	
+	public void add(Entity entity)
+	{
+		objects.add(entity);
+		if(entity instanceof Camera)
+			cameras.add((Camera)entity);
+	}
+	
+	public void remove(Entity entity)
+	{
+		objects.remove(entity);
+	}
+	
 	public void tick()
 	{
-		cube.rot.add(Math.PI/20.0, 0, Math.PI/20.0);
-		cameras.get(1).rot.add(-Math.PI/20.0, 0, -Math.PI/20.0);
+//		cube.rot.add(Math.PI/20.0, 0, Math.PI/20.0);
+//		cameras.get(1).rot.add(Math.PI/20.0, 0, Math.PI/20.0);c
 		
 		for(int i = 0; i < objects.size(); i++)
 			objects.get(i).tick();
@@ -75,15 +88,5 @@ public class World
 	public void render(Graphics g)
 	{
 		Render.render(this, g);
-	}
-	
-	public void add(Entity entity)
-	{
-		objects.add(entity);
-	}
-	
-	public void remove(Entity entity)
-	{
-		objects.remove(entity);
 	}
 }

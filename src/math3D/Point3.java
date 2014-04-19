@@ -7,6 +7,11 @@ public class Point3 extends Tuple
 		super(x, y, z);
 	}
 	
+	public Point3(Tuple tup)
+	{
+		super(tup.x, tup.y, tup.z);
+	}
+	
 	//rotate this point about point by rot
 	public Point3 rotateAbout(Rotation rot, Point3 point)
 	{

@@ -57,21 +57,21 @@ public class SpinCube extends VisibleObject
 		thetaDelta+=Math.PI/100;
 	}
 	
-	public void rotateCube(float thetadelta)
-	{
-		Point3 topRotPoint = new Point3(loc.x, loc.y, loc.z+side/2);
-		Point3 botRotPoint = new Point3(loc.x, loc.y, loc.z-side/2);
-		
-		for(int i = 0; i < 4; i++)
-		{
-			Point3 p = storedPoints.get(i);
-			points.set(i, p.rotateAbout(new Rotation(0, 0, thetaDelta), topRotPoint));
-		}
-		
-		for(int i = 4; i < 8; i++)
-		{
-			Point3 p = storedPoints.get(i);
-			points.set(i, p.rotateAbout(new Rotation(0, 0, thetaDelta), botRotPoint));
-		}
-	}
+//	public void rotateCube(float thetadelta)
+//	{
+//		Point3 topRotPoint = new Point3(loc.x, loc.y, loc.z+side/2);
+//		Point3 botRotPoint = new Point3(loc.x, loc.y, loc.z-side/2);
+//		
+//		for(int i = 0; i < 4; i++)
+//		{
+//			Point3 p = storedPoints.get(i);
+//			points.set(i, p.rotateAbout(new Rotation(0, 0, thetaDelta), topRotPoint));
+//		}
+//		
+//		for(int i = 4; i < 8; i++)
+//		{
+//			Point3 p = storedPoints.get(i);
+//			points.set(i, p.rotateAbout(new Rotation(0, 0, thetaDelta), botRotPoint));
+//		}
+//	}
 }

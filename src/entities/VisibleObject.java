@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import main.Main;
 import main.Render;
-import main.World;
 import math3D.*;
 import entities.visible.*;
 
@@ -66,32 +65,32 @@ public class VisibleObject extends Entity
 			
 			if(v instanceof VPoint)
 			{
-				Point2 p = Render.getLocalCoords(getGlobalPoint(v.points[0]));
+				Point2 p = Render.getScreenCoords(getGlobalPoint(v.points[0]));
 				g.setColor(c1);
 				g.drawOval((int)p.x-5, (int)p.y-5, 10, 10);
 			}
 			else if(v instanceof VEdge)
 			{
-				Point2 p1 = Render.getLocalCoords(getGlobalPoint(v.points[0]));
-				Point2 p2 = Render.getLocalCoords(getGlobalPoint(v.points[1]));
+				Point2 p1 = Render.getScreenCoords(getGlobalPoint(v.points[0]));
+				Point2 p2 = Render.getScreenCoords(getGlobalPoint(v.points[1]));
 				g.setColor(c2);
 				g.drawLine((int)p1.x, (int)p1.y, (int)p2.x, (int)p2.y);
 			}
 			else if(v instanceof VTri)
 			{
-				Point2 p1 = Render.getLocalCoords(getGlobalPoint(v.points[0]));
-				Point2 p2 = Render.getLocalCoords(getGlobalPoint(v.points[1]));
-				Point2 p3 = Render.getLocalCoords(getGlobalPoint(v.points[2]));
+				Point2 p1 = Render.getScreenCoords(getGlobalPoint(v.points[0]));
+				Point2 p2 = Render.getScreenCoords(getGlobalPoint(v.points[1]));
+				Point2 p3 = Render.getScreenCoords(getGlobalPoint(v.points[2]));
 				Polygon poly = new Polygon(new int[]{(int)p1.x, (int)p2.x, (int)p3.x}, new int[]{(int)p1.y, (int)p2.y, (int)p3.y}, 3);
 				g.setColor(c3);
 				g.fillPolygon(poly);
 			}
 			else if(v instanceof VQuad)
 			{
-				Point2 p1 = Render.getLocalCoords(getGlobalPoint(v.points[0]));
-				Point2 p2 = Render.getLocalCoords(getGlobalPoint(v.points[1]));
-				Point2 p3 = Render.getLocalCoords(getGlobalPoint(v.points[2]));
-				Point2 p4 = Render.getLocalCoords(getGlobalPoint(v.points[3]));
+				Point2 p1 = Render.getScreenCoords(getGlobalPoint(v.points[0]));
+				Point2 p2 = Render.getScreenCoords(getGlobalPoint(v.points[1]));
+				Point2 p3 = Render.getScreenCoords(getGlobalPoint(v.points[2]));
+				Point2 p4 = Render.getScreenCoords(getGlobalPoint(v.points[3]));
 				Polygon poly = new Polygon(new int[]{(int)p1.x, (int)p2.x, (int)p3.x, (int)p4.x}, new int[]{(int)p1.y, (int)p2.y, (int)p3.y, (int)p4.y}, 4);
 				g.setColor(c4);
 				g.fillPolygon(poly);
@@ -106,7 +105,7 @@ public class VisibleObject extends Entity
 				ArrayList<Point2> ps = new ArrayList<Point2>();
 				
 				for(int i = 0; i < v.points.length; i++)
-					ps.add( Render.getLocalCoords(getGlobalPoint(v.points[i])) );
+					ps.add( Render.getScreenCoords(getGlobalPoint(v.points[i])) );
 				
 				int[] xPolyPoints = new int[v.points.length];
 				for(int i = 0; i < ps.size(); i++)

@@ -10,7 +10,16 @@ public class Tuple
         this.y = y;
         this.z = z;
     }
-
+    
+    public Tuple unit()
+    {
+    	float mag = (float)Math.sqrt(x*x + y*y + z*z);
+    	float newX = x / mag;
+    	float newY = y / mag;
+    	float newZ = z / mag;
+    	return new Tuple(newX, newY, newZ);
+    }
+    
     public Tuple add(Tuple other)
     {
         return new Tuple(x + other.x, y + other.y, z + other.z);

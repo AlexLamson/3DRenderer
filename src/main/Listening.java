@@ -8,7 +8,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-import math3D.Tuple;
+import math3D.Point3;
 import entities.Camera;
 
 public class Listening implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener
@@ -26,10 +26,12 @@ public class Listening implements KeyListener, MouseListener, MouseMotionListene
 		{
 			//wasd keys
 		case KeyEvent.VK_W:
-			cam.loc.y += camSpeed;
+//			cam.loc.y += camSpeed;
+			cam.loc = new Point3(cam.loc.add(cam.getLookDir().unit().scale(0.50f)));
 			break;
 		case KeyEvent.VK_S:
-			cam.loc.y += -camSpeed;
+//			cam.loc.y += -camSpeed;
+			cam.loc = new Point3(cam.loc.add(cam.getLookDir().unit().scale(-0.50f)));
 			break;
 		case KeyEvent.VK_A:
 			cam.loc.x += -camSpeed;
@@ -64,24 +66,29 @@ public class Listening implements KeyListener, MouseListener, MouseMotionListene
 			break;
 			
 		case KeyEvent.VK_SHIFT:
+			System.out.println(cam.getLookDir());
+			break;
+			
+		case KeyEvent.VK_CONTROL:
+			Main.world.switchCameras();
 			break;
 
 		//arrow keys
 		case KeyEvent.VK_LEFT:
-			Main.world.cameras.get(1).rot.add(0, 0, -rotSpeed);
-//			Main.world.getSelectedCamera().rot.add(0, 0, -rotSpeed);
+//			Main.world.cameras.get(1).rot.add(0, 0, rotSpeed);
+			cam.rot.add(0, 0, rotSpeed);
 			break;
 		case KeyEvent.VK_RIGHT:
-			Main.world.cameras.get(1).rot.add(0, 0, rotSpeed);
-//			Main.world.getSelectedCamera().rot.add(0, 0, rotSpeed);
+//			Main.world.cameras.get(1).rot.add(0, 0, -rotSpeed);
+			cam.rot.add(0, 0, -rotSpeed);
 			break;
 		case KeyEvent.VK_DOWN:
-			Main.world.cameras.get(1).rot.add(-rotSpeed, 0, 0);
-//			Main.world.getSelectedCamera().rot.add(-rotSpeed, 0, 0);
+//			Main.world.cameras.get(1).rot.add(-rotSpeed, 0, 0);
+			cam.rot.add(-rotSpeed, 0, 0);
 			break;
 		case KeyEvent.VK_UP:
-			Main.world.cameras.get(1).rot.add(rotSpeed, 0, 0);
-//			Main.world.getSelectedCamera().rot.add(rotSpeed, 0, 0);
+//			Main.world.cameras.get(1).rot.add(rotSpeed, 0, 0);
+			cam.rot.add(rotSpeed, 0, 0);
 			break;
 		
 		case KeyEvent.VK_SPACE:
