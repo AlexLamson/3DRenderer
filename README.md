@@ -1,7 +1,7 @@
 3DRenderer
 ==========
 
-Render 3D objects using only the standard library
+Render 3D objects using only the standard graphics library
 
 Examples
 ========
